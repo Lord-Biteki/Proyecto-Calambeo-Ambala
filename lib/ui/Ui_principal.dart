@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:interfaz_principal_real/widgets/menu_lateral.dart';
 import 'dart:async'; // Para programar cambios automáticos
-import '../screens/gallery_home.dart';
-import '../widgets/email_dialog.dart'; // Importamos el diálogo de correo
+import '../screens/principal/paginas_rutas.dart';
 
 class UiPrincipal extends StatefulWidget {
   const UiPrincipal({super.key});
@@ -17,6 +17,14 @@ class _UiPrincipalState extends State<UiPrincipal> {
     'assets/images/image (2).jpeg',
     'assets/images/image (2).jpg',
     'assets/images/image (3).jpeg',
+    "assets/images/Comida.jpeg",
+    "assets/images/meraki.jpeg",
+    "assets/images/autoctonos.jpeg",
+    "assets/images/comida1.jpeg",
+    "assets/images/botanico3.jpeg",
+    "assets/images/autoctonos1.jpeg",
+    "assets/images/meraki2.jpeg",
+    "assets/images/maraki1.jpeg",
   ];
 
   int _currentIndex = 0;
@@ -34,10 +42,6 @@ class _UiPrincipalState extends State<UiPrincipal> {
     });
 
     // Mostrar el diálogo al cargar la pantalla
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      EmailDialog.show(
-          context); // Mostramos el diálogo cuando se construye la UI
-    });
   }
 
   @override
@@ -63,7 +67,7 @@ class _UiPrincipalState extends State<UiPrincipal> {
           },
         ),
       ),
-      drawer: _buildMenuLateral(), // Agregamos el menú lateral
+      drawer: const MenuLateral(), // Agregamos el menú lateral
       body: Stack(
         children: [
           // Fondo animado con AnimatedSwitcher
@@ -121,63 +125,18 @@ class _UiPrincipalState extends State<UiPrincipal> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _buildCategoryButton(context, 'Galería',
-                          Icons.image_search, GalleryHome()),
+                          Icons.image_search, const PaginaRutas()),
                       const SizedBox(width: 10),
                       _buildCategoryButton(
                           context,
                           'Sitios Turísticos',
                           Icons.place,
-                          GalleryHome()), // Nuevo botón para Sitios Turísticos
+                          const PaginaRutas()), // Nuevo botón para Sitios Turísticos
                     ],
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Método para construir el menú lateral
-  Widget _buildMenuLateral() {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.green,
-            ),
-            child: Text(
-              'Menú Principal',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Inicio'),
-            onTap: () {
-              Navigator.pop(context); // Cerrar el menú al seleccionar
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('Acerca de'),
-            onTap: () {
-              Navigator.pop(context); // Cerrar el menú
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.contact_page),
-            title: const Text('Contacto'),
-            onTap: () {
-              Navigator.pop(context); // Cerrar el menú
-            },
           ),
         ],
       ),

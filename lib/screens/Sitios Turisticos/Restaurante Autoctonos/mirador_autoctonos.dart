@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:interfaz_principal_real/screens/galeria/galeryHome.dart';
 import '../../../widgets/carousel_widget.dart';
 import '../../../widgets/custom_bottom_navigation.dart';
 import '../../../widgets/custom_buttons_section.dart';
-import 'mapa_RutaAnconTesorito.dart';
+import '../../principal/paginas_rutas.dart';
+import 'mapa_RutaAutoctonos.dart';
 
-class MiradorAnconTesoritoScreen extends StatelessWidget {
+class MiradorAutoctonosScreen extends StatelessWidget {
   final String title;
   final String description;
 
-  const MiradorAnconTesoritoScreen({
+  const MiradorAutoctonosScreen({
     super.key,
     required this.title,
     required this.description,
@@ -19,8 +19,8 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mirador Ancón Tesorito'),
-        backgroundColor: Colors.green[700],
+        title: const Text('Mirador Autóctonos'),
+        backgroundColor: Colors.green[700], // Color del AppBar
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -28,30 +28,22 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Mirador Ancón Tesorito',
+              'Mirador Autoctonos',
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
                 color: Colors.green[800],
               ),
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Este es el resultado de la creatividad e innovación de una familia campesina, quien se dio a la tarea de emprender con este maravilloso proyecto a la vista de los ibaguereños. En la vereda Ancón Tesorito de Ibagué, existe un lugar que combina la gastronomía exquisita y las buenas vistas que tiene el Tolima, para dar paso al Mirador Tesorito, un nuevo sitio de recreación que llegó a la ciudad. Este lugar esta fundado por una humilde pero emprendedora familia campesina que quiso aprovechar lo que sus alrededores les ofrecen para llevar la naturaleza a la vida de los ciudadanos.',
-              style: TextStyle(fontSize: 16, height: 1.5),
-            ),
-            const SizedBox(height: 20),
-
+            // Carrusel de imágenes del lugar
             // Reemplazo del Carrusel utilizando el widget desacoplado
             const Center(
               child: CustomCarousel(
                 imagePaths: [
-                  'assets/images/Tesorito.jpeg',
-                  'assets/images/Tesorito1.jpeg',
-                  'assets/images/Tesorito2.jpeg',
-                  'assets/images/Tesorito3.jpeg',
-                  'assets/images/tesorito4.jpeg',
-                  'assets/images/tesorito5.jpeg',
+                  'assets/images/autoctonos.jpeg',
+                  'assets/images/autoctonos1.jpeg',
+                  'assets/images/autoctonos2.jpeg',
+                  'assets/images/autoctonos3.jpeg',
                 ],
                 height: 200,
                 autoPlay: true,
@@ -60,6 +52,18 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
+            const SizedBox(height: 20),
+            const SizedBox(height: 20),
+
+            // Descripción del lugar
+            const Text(
+              'El Mirador Autóctonos ofrece vistas espectaculares de la ciudad. Este sitio, ubicado en Ibagué, es ideal para quienes buscan un espacio tranquilo rodeado de naturaleza y con vistas incomparables. Cuenta con un restaurante con una carta bastante variada con precios accesibles para cualquier publico',
+              style: TextStyle(fontSize: 16, height: 1.5),
+              textAlign: TextAlign.justify,
+            ),
+            const SizedBox(height: 20),
+
+            // Horarios de atención
             Text(
               'Horarios de atención:',
               style: TextStyle(
@@ -73,9 +77,9 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
             const Text('• Sábados y domingos: 9:00 am - 6:00 pm'),
             const SizedBox(height: 30),
 
-            // Sección Servicios
+            // Platos a la carta y espacio para imagen
             Text(
-              'Servicios',
+              'Platos a la Carta',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -85,30 +89,15 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
             const SizedBox(height: 15),
             const Text(
               '• Comida típica.\n'
-              '• Mirador con vistas panorámicas a la ciudad de ibague.\n'
-              '• Área de picnic.\n'
-              '• Guías turísticos disponibles.\n'
-              '• Bebida gratis al subir y pagar la entrada.\n'
-              '• Servicio de parqueadero',
+              '• Platos internacionales.\n'
+              '• Postres variados.\n'
+              '• Bebidas naturales y refrescantes.',
               style: TextStyle(fontSize: 16, height: 1.5),
             ),
-            const SizedBox(height: 30),
-
-            // Sección Restaurante y Carta
-            Text(
-              'Restaurante y carta',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.green[800],
-              ),
-            ),
-            const SizedBox(height: 15),
-
-            // Imagen del restaurante
+            const SizedBox(height: 20),
             Center(
               child: Container(
-                height: 200,
+                height: 180,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -123,22 +112,17 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Image.asset(
-                    'assets/images/tesorito5.jpeg',
+                    'assets/images/autoctonos3.jpeg',
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-
-            const Text(
-              'Disfruta de una variada selección de platos típicos con ingredientes locales frescos. Nuestro restaurante es reconocido por su ambiente acogedor y vistas inigualables.',
-              style: TextStyle(fontSize: 16, height: 1.5),
-            ),
             const SizedBox(height: 30),
 
+            // Sobre nosotros
             Text(
-              "Sobre nosotros",
+              "Sobre Nosotros",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -146,13 +130,14 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 15),
-
             const Text(
-              'Somos una familia comprometida con el desarrollo sostenible y la promoción de la cultura local a través de la gastronomía. Te invitamos a disfrutar de nuestra pasión por la comida y la naturaleza.',
+              'Somos un equipo comprometido con ofrecer una experiencia única en un ambiente natural y acogedor, compartiendo la riqueza cultural y gastronómica de la región.',
               style: TextStyle(fontSize: 16, height: 1.5),
+              textAlign: TextAlign.justify,
             ),
             const SizedBox(height: 30),
 
+            // Líneas de comunicación
             Text(
               "Líneas de Comunicación",
               style: TextStyle(
@@ -163,8 +148,9 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             const Text(
-              '• Teléfono: +57 3138211314 - +57 3228786095\n'
-              '• Redes Sociales: @miradorancontesorito',
+              '• Teléfono: +57 123 456 7890\n'
+              '• Email: soporte@miradorautoctonos.com\n'
+              '• Redes Sociales: @miradorautoctonos',
               style: TextStyle(fontSize: 16, height: 1.5),
             ),
             const SizedBox(height: 30),
@@ -176,7 +162,7 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RutaAnconTesoritoScreen(),
+                    builder: (context) => const MapaRutaAutoctonos(),
                   ),
                 );
               },
@@ -185,7 +171,7 @@ class MiradorAnconTesoritoScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const GaleryHome(),
+                    builder: (context) => const PaginaRutas(),
                   ),
                 );
               },

@@ -27,15 +27,15 @@ class _MapaParqueTematicoMerakiScreenState
         onMapCreated: (GoogleMapController controller) {
           mapController = controller;
         },
-        initialCameraPosition: CameraPosition(
+        initialCameraPosition: const CameraPosition(
           target: _parqueTematicoMerakiLocation,
           zoom: 14.0,
         ),
         markers: {
-          Marker(
-            markerId: const MarkerId('parqueTematicoMeraki'),
+          const Marker(
+            markerId: MarkerId('parqueTematicoMeraki'),
             position: _parqueTematicoMerakiLocation,
-            infoWindow: const InfoWindow(
+            infoWindow: InfoWindow(
               title: 'Parque Temático Meraki',
               snippet: '¡Un lugar de diversión y naturaleza!',
             ),

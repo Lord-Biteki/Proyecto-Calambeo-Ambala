@@ -1,36 +1,59 @@
-// archivo: lib/widgets/carousel_widget.dart
-
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
-class CarouselWidget extends StatelessWidget {
-  final List<String> imgList;
+class CustomCarousel extends StatelessWidget {
+  final List<String> imagePaths;
+  final double height;
+  final bool autoPlay;
+  final double viewportFraction;
 
-  const CarouselWidget({super.key, required this.imgList});
+  const CustomCarousel({
+    super.key,
+    required this.imagePaths,
+    this.height = 200,
+    this.autoPlay = true,
+    this.viewportFraction = 0.8,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: double.infinity,
-        autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 3),
-        autoPlayAnimationDuration: const Duration(milliseconds: 800),
-        autoPlayCurve: Curves.easeInOut,
-        enlargeCenterPage: true,
-        viewportFraction: 1.0, // Asegúrate de que ocupe toda la pantalla
-      ),
-      items: imgList
-          .map((item) => Container(
+    return Center(
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: height,
+          autoPlay: autoPlay,
+          enlargeCenterPage: true,
+          aspectRatio: 16 / 9,
+          viewportFraction: viewportFraction,
+        ),
+        items: imagePaths.map((imagePath) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(item),
-                    fit: BoxFit
-                        .cover, // Ajusta la imagen al tamaño del contenedor
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.asset(
+                    imagePath,
+                    fit: BoxFit.cover,
                   ),
                 ),
-              ))
-          .toList(),
+              );
+            },
+          );
+        }).toList(),
+      ),
     );
   }
 }

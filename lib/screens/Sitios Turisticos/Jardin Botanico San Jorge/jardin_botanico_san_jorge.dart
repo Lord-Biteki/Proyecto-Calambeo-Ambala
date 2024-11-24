@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:interfaz_principal_real/screens/Sitios%20Turisticos/Jardin%20Botanico%20San%20Jorge/mapa_RutaJardinBotanico.dart';
+import 'package:interfaz_principal_real/screens/galeria/galeryHome.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../../widgets/carousel_widget.dart';
 import '../../../widgets/custom_bottom_navigation.dart';
-import '../../gallery_home.dart';
+import '../../../widgets/custom_buttons_section.dart';
+import '../../principal/paginas_rutas.dart';
 
 class JardinBotanicoSanJorgeScreen extends StatelessWidget {
-  const JardinBotanicoSanJorgeScreen({super.key});
+  final String title;
+  final String description;
+
+  const JardinBotanicoSanJorgeScreen({
+    super.key,
+    required this.title,
+    required this.description,
+  });
 
   // Función para abrir la URL
   void _launchURL() async {
@@ -39,29 +49,19 @@ class JardinBotanicoSanJorgeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-
-            // Espacio para una imagen del lugar
-            Center(
-              child: Container(
+            const Center(
+              child: CustomCarousel(
+                imagePaths: [
+                  'assets/images/imagenJardinBotanico1.jpeg',
+                  'assets/images/imagenJardinBotanico2.jpeg',
+                  'assets/images/botanico3.jpeg',
+                  'assets/images/botanico4.png',
+                  'assets/images/botanico5.jpeg',
+                  'assets/images/botanico6.jpeg',
+                ],
                 height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 10,
-                      offset: Offset(0, 5),
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.asset(
-                    'assets/images/jardin_botanico.jpg', // Reemplaza con la imagen del Jardín Botánico
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                autoPlay: true,
+                viewportFraction: 0.8,
               ),
             ),
             const SizedBox(height: 20),
@@ -72,11 +72,10 @@ class JardinBotanicoSanJorgeScreen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Center(
-                child: Text(
-                  'Mapa físico del lugar',
-                  style: TextStyle(fontSize: 18, color: Colors.black54),
+                image: const DecorationImage(
+                  image: AssetImage(
+                      'assets/images/botanico5.jpeg'), // Ruta de la imagen
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -184,7 +183,8 @@ class JardinBotanicoSanJorgeScreen extends StatelessWidget {
               '• Visitas guiadas: Aprende sobre la flora y fauna del jardín.\n'
               '• Talleres educativos: Actividades para niños y adultos sobre conservación.\n'
               '• Espacios para eventos: Zonas disponibles para reuniones y celebraciones.\n'
-              '• Tienda de souvenirs: Recuerdos y productos locales a la venta.',
+              '• Tienda de souvenirs: Recuerdos y productos locales a la venta.\n'
+              '• Avistamiento de aves y jardin medicinal.\n',
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
@@ -213,63 +213,44 @@ class JardinBotanicoSanJorgeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Botón de la ruta
-            Center(
-              child: Column(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const MapaRutajardinbotanico(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green[600],
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 25),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      shadowColor: Colors.black45,
-                      elevation: 10,
-                    ),
-                    child: const Text(
-                      '¿Te gustaría saber la ruta para llegar? Dale click aquí',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => GalleryHome(),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange[600],
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 15, horizontal: 25),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      shadowColor: Colors.black45,
-                      elevation: 10,
-                    ),
-                    child: const Text(
-                      '¿Te gustaría ver las fotos que hay del sitio? Dale click aquí',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+
+            Text(
+              "Líneas de Comunicación",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green[800],
               ),
+            ),
+            const SizedBox(height: 15),
+            const Text(
+              '• Teléfono: +57 313 3783055\n'
+              '• Email: contactenos@corporacionsanjorge.com\n'
+              '• Redes Sociales: @jardinbotanicosanjorge',
+              style: TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 30),
+
+            // Sección de botones desacoplados
+            CustomButtonsSection(
+              onRouteButtonPressed: () {
+                // Lógica para abrir la ruta
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const MapaRutajardinbotanico(),
+                  ),
+                );
+              },
+              onPhotosButtonPressed: () {
+                // Lógica para abrir la galería de fotos
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GaleryHome(),
+                  ),
+                );
+              },
             ),
           ],
         ),

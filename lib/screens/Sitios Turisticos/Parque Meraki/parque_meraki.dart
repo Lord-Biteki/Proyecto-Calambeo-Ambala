@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:interfaz_principal_real/screens/Sitios%20Turisticos/Parque%20Meraki/mapa_RutaParqueMeraki.dart';
+import 'package:interfaz_principal_real/screens/galeria/galeryHome.dart';
+import '../../../widgets/carousel_widget.dart';
 import '../../../widgets/custom_bottom_navigation.dart';
-import '../../gallery_home.dart';
+import '../../../widgets/custom_buttons_section.dart';
 
 class ParqueTematicoMeraki extends StatelessWidget {
-  const ParqueTematicoMeraki({super.key});
+  final String title;
+  final String description;
+
+  const ParqueTematicoMeraki({
+    super.key,
+    required this.title,
+    required this.description,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +36,18 @@ class ParqueTematicoMeraki extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Espacio para imagen del parque
-            Container(
-              width: double.infinity,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: const Center(
-                child: Text(
-                  'Imagen del Parque Temático Meraki',
-                  style: TextStyle(fontSize: 18, color: Colors.black54),
-                ),
+            // Reemplazado con el widget de carrusel
+            const Center(
+              child: CustomCarousel(
+                imagePaths: [
+                  'assets/images/meraki.jpeg',
+                  'assets/images/maraki1.jpeg',
+                  'assets/images/meraki2.jpeg',
+                  'assets/images/meraki3.jpeg',
+                ],
+                height: 200,
+                autoPlay: true,
+                viewportFraction: 0.8,
               ),
             ),
             const SizedBox(height: 20),
@@ -65,9 +73,19 @@ class ParqueTematicoMeraki extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(15),
+                image: const DecorationImage(
+                  image: AssetImage(
+                      'assets/images/Comida.jpeg'), // Ruta de la imagen
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: const Center(
-                child: Text(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.black
+                      .withOpacity(0.4), // Efecto de opacidad para el texto
+                ),
+                child: const Text(
                   'Imagen de la Carta',
                   style: TextStyle(fontSize: 18, color: Colors.black54),
                 ),
@@ -131,61 +149,43 @@ class ParqueTematicoMeraki extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
-
-            // Botón para ver la ruta
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const MapaParqueTematicoMerakiScreen(),
-                    ),
-                  ); // Aquí puedes agregar la navegación a la pantalla de ruta
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green[700],
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                ),
-                child: const Text(
-                  '¿Te gustaría saber la ruta para llegar? Dale click aquí',
-                  style: TextStyle(color: Colors.white),
-                ),
+            Text(
+              "Líneas de Comunicación",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green[800],
               ),
             ),
-            const SizedBox(height: 20),
-            // Botón para ver las fotos
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GalleryHome(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange[600],
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 25),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+            const SizedBox(height: 15),
+            const Text(
+              '• Teléfono: +57 318 7156890\n'
+              '• Email: contactenos@corporacionsanjorge.com\n'
+              '• Redes Sociales: @parquetematicomeraqui',
+              style: TextStyle(fontSize: 16, height: 1.5),
+            ),
+            const SizedBox(height: 30),
+            // Sección de botones desacoplados
+            CustomButtonsSection(
+              onRouteButtonPressed: () {
+                // Lógica para abrir la ruta
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const MapaParqueTematicoMerakiScreen(),
                   ),
-                  shadowColor: Colors.black45,
-                  elevation: 10,
-                ),
-                child: const Text(
-                  '¿Te gustaría ver las fotos que hay del sitio? Dale click aquí',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                  textAlign: TextAlign.center,
-                ),
-              ),
+                );
+              },
+              onPhotosButtonPressed: () {
+                // Lógica para abrir la galería de fotos
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const GaleryHome(),
+                  ),
+                );
+              },
             ),
           ],
         ),
